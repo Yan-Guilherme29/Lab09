@@ -3,6 +3,10 @@ package org.Principal;
 import org.model.CalculadoraImpostos;
 import org.model.ConversorMoeda;
 import org.model.GerenciadorLog;
+import org.model.UtilitariosDataHora;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Main {
     public static void main(String[] args) {
@@ -29,7 +33,7 @@ public class Main {
 
         double valor = 1000.0; // valor base
 
-        // Exemplo de uso direto dos métodos estáticos
+
         double irrf = CalculadoraImpostos.calcularIRRF(valor);
         double icms = CalculadoraImpostos.calcularICMS(valor);
         double iss  = CalculadoraImpostos.calcularISS(valor);
@@ -38,9 +42,11 @@ public class Main {
         System.out.println("ICMS: R$ " + icms);
         System.out.println("ISS : R$ " + iss);
 
-        // Ou usando o método auxiliar
+
         System.out.println();
         CalculadoraImpostos.exibirCalculos(valor);
+
+        // -----------------------------------------------------------------------------------------------------
 
 
         // Log padrão (console)
@@ -52,6 +58,25 @@ public class Main {
         GerenciadorLog.configurarDestino(GerenciadorLog.DestinoLog.ARQUIVO);
         GerenciadorLog.logInfo("Este log será salvo no arquivo.");
         GerenciadorLog.logError("Erro crítico foi registrado no arquivo.");
+
+        // -----------------------------------------------------------------------------------------------------
+
+        LocalDate hoje = LocalDate.now();
+        LocalDate dataAntiga = LocalDate.of(2020, 5, 15);
+        LocalDateTime agora = LocalDateTime.now();
+
+        System.out.println("=== FORMATAÇÃO ===");
+        System.out.println("Data formatada: " + UtilitariosDataHora.formatarData(hoje, "dd/MM/yyyy"));
+        System.out.println("Data e hora formatadas: " + UtilitariosDataHora.formatarDataHora(agora, "dd/MM/yyyy HH:mm:ss"));
+
+        System.out.println("\n=== DIFERENÇAS ===");
+        System.out.println("Diferença em dias: " + UtilitariosDataHora.diferencaEmDias(dataAntiga, hoje));
+        System.out.println("Diferença em meses: " + UtilitariosDataHora.diferencaEmMeses(dataAntiga, hoje));
+        System.out.println("Diferença em anos: " + UtilitariosDataHora.diferencaEmAnos(dataAntiga, hoje));
+
+        System.out.println("\n=== PROPRIEDADES ===");
+        System.out.println("Ano 2024 é bissexto? " + UtilitariosDataHora.ehAnoBissexto(2024));
+        System.out.println("Dia da semana de hoje: " + UtilitariosDataHora.diaDaSemana(hoje));
 
 
     }
