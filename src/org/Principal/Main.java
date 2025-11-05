@@ -2,6 +2,7 @@ package org.Principal;
 
 import org.model.CalculadoraImpostos;
 import org.model.ConversorMoeda;
+import org.model.GerenciadorLog;
 
 public class Main {
     public static void main(String[] args) {
@@ -40,6 +41,17 @@ public class Main {
         // Ou usando o método auxiliar
         System.out.println();
         CalculadoraImpostos.exibirCalculos(valor);
+
+
+        // Log padrão (console)
+        GerenciadorLog.logInfo("Sistema iniciado com sucesso.");
+        GerenciadorLog.logWarn("Uso de memória acima de 80%.");
+        GerenciadorLog.logError("Falha ao conectar ao banco de dados.");
+
+        // Alterando o destino para arquivo
+        GerenciadorLog.configurarDestino(GerenciadorLog.DestinoLog.ARQUIVO);
+        GerenciadorLog.logInfo("Este log será salvo no arquivo.");
+        GerenciadorLog.logError("Erro crítico foi registrado no arquivo.");
 
 
     }
